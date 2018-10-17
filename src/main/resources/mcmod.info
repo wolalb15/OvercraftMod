@@ -1,8 +1,8 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "overcraft",
+  "name": "Overcraft Mod",
+  "description": "A school project mo to bring Overwatch into Minecraft.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
