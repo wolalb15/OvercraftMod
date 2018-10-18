@@ -1,6 +1,7 @@
 package com.overcraft.init;
 
 import com.overcraft.OvercraftMod;
+import com.overcraft.items.weapons.CustomArrow;
 import com.overcraft.items.weapons.TracerWeapon;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ public class ModItems {
     public static Item TRACER_WEAPON;
     public static void init() {
         TRACER_WEAPON = new TracerWeapon("tracer_gun");
+
     }
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
