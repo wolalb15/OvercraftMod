@@ -1,6 +1,6 @@
-package com.tt.overcraft;
+package com.overcraft;
 
-import com.tt.overcraft.init.ModItems;
+import com.overcraft.init.ModItems;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

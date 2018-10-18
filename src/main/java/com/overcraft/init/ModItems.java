@@ -1,7 +1,7 @@
-package com.tt.overcraft.init;
+package com.overcraft.init;
 
-import com.tt.overcraft.items.weapons.TracerWeapon;
-import com.tt.overcraft.OvercraftMod;
+import com.overcraft.OvercraftMod;
+import com.overcraft.items.weapons.TracerWeapon;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
