@@ -29,7 +29,7 @@ public class TracerWeapon extends Item {
         ItemStack item = playerIn.getHeldItem(handIn);
         Vec3d aim = playerIn.getLookVec();
         EntityArrow bullet = new CustomArrow(worldIn,playerIn);
-        bullet.shoot(playerIn,0,0,0,10,1);
+        bullet.shoot(playerIn,0,0,0,100,1);
         bullet.setPosition(playerIn.posX, playerIn.posY + 1.5, playerIn.posZ);
         bullet.setDamage(100);
 
