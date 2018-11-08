@@ -1,6 +1,9 @@
 package com.overcraft.items.weapons;
 
 import com.overcraft.custom.CustomArrow;
+import com.overcraft.custom.CustomParticle;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +16,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
+import org.lwjgl.input.Keyboard;
 
 public class TracerWeapon extends Item {
     public TracerWeapon (String name) {
@@ -32,7 +38,7 @@ public class TracerWeapon extends Item {
         bullet.setPosition(playerIn.posX, playerIn.posY + 0.6, playerIn.posZ);
         bullet.setDamage(100);
 
-       bullet.setVelocity(aim.x * 10,aim.y,aim.z * 10);
+        bullet.setVelocity(aim.x * 10,aim.y,aim.z * 10);
         worldIn.spawnEntity(bullet);
 
 
@@ -43,10 +49,16 @@ public class TracerWeapon extends Item {
         Vec3d aim = entityLiving.getLookVec();
         World world = entityLiving.getEntityWorld();
 
-
-        world.spawnParticle(EnumParticleTypes.WATER_SPLASH,false,entityLiving.posX,entityLiving.posY + 0.8,entityLiving.posZ,10,10, 10,1,1,1);
+        CustomParticle cp = new CustomParticle(entityLiving.getEntityWorld(),entityLiving.posX, entityLiving.posY,entityLiving.posZ);
+        cp.setSize(20f,20f);
+        Minecraft.getMinecraft().effectRenderer.addEffect(cp);
         entityLiving.setPositionAndUpdate(entityLiving.posX,entityLiving.posY,entityLiving.posZ);
         return false;
+    }
+
+    @SubscribeEvent
+    public void onKeyInput(InputEvent.KeyInputEvent event) {
+        
     }
 
 }

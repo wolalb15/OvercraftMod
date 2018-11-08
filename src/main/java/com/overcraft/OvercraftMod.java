@@ -1,11 +1,15 @@
 package com.overcraft;
 
 import com.overcraft.init.ModItems;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.input.Keyboard;
 
 @Mod(modid = OvercraftMod.MODID, name = OvercraftMod.NAME, version = OvercraftMod.VERSION)
 public class OvercraftMod
@@ -19,6 +23,7 @@ public class OvercraftMod
     @Mod.Instance
     public static OvercraftMod instance;
 
+    public static KeyBinding ult = new KeyBinding("Ultimate",Keyboard.KEY_P,"category.OvercraftMod");
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -30,6 +35,7 @@ public class OvercraftMod
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-
+        ClientRegistry.registerKeyBinding(ult);
+        FMLCommonHandler.instance().bus().register(new KeyHandler());
     }
 }
