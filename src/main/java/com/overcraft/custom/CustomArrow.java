@@ -1,4 +1,4 @@
-package com.overcraft.items.weapons;
+package com.overcraft.custom;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityTippedArrow;

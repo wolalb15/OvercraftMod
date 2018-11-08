@@ -1,7 +1,6 @@
 package com.overcraft.init;
 
 import com.overcraft.OvercraftMod;
-import com.overcraft.items.weapons.CustomArrow;
 import com.overcraft.items.weapons.TracerWeapon;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
