@@ -8,6 +8,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -33,6 +34,11 @@ public class TracerWeapon extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack item = playerIn.getHeldItem(handIn);
         Vec3d aim = playerIn.getLookVec();
+        if(playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem()==Item.getByNameOrId("minecraft:stone")
+                && playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getCount() != 0){
+            ItemStack slot =  playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
+            slot.setCount(slot.getCount()-1);
+        }
         EntityArrow bullet = new CustomArrow(worldIn,playerIn);
         bullet.shoot(playerIn,0,0,0,100,1);
         bullet.setPosition(playerIn.posX, playerIn.posY + 0.6, playerIn.posZ);
@@ -58,7 +64,7 @@ public class TracerWeapon extends Item {
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        
+
     }
 
 }
