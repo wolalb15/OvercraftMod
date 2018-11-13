@@ -21,10 +21,10 @@ public class KeyHandler {
             int zz = 0;
             double zzD;
             for (int i = 0; i  < 150; i++){
-                zz = rd.nextInt(200) ;
+                zz = rd.nextInt(50) - 25    ;
                 zzD  = (double) zz / 100;
                 System.out.println(zzD);
-                player.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_SPLASH,player.posX,player.posY + zzD,player.posZ,1,1,1,1);
+                player.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_SPLASH,player.posX + zzD,player.posY + 0.8 + zzD,player.posZ + zzD,1,1,1,1);
             }
         }
 
