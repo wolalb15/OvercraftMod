@@ -1,13 +1,19 @@
 package com.overcraft;
 
+import com.overcraft.custom.CustomArrow;
 import com.overcraft.init.ModItems;
+import com.overcraft.test.EntityComet;
+import com.overcraft.test.RenderComet;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
@@ -35,7 +41,10 @@ public class OvercraftMod
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        RenderingRegistry.registerEntityRenderingHandler(EntityComet.class, RenderComet::new);
+        EntityRegistry.registerModEntity(new ResourceLocation(OvercraftMod.MODID, "comet"), EntityComet.class, "entity_dull_arrow", 0, "overcraft",80, 1, false);
         ClientRegistry.registerKeyBinding(ult);
+
         FMLCommonHandler.instance().bus().register(new KeyHandler());
     }
 }

@@ -1,7 +1,7 @@
 {
 	"__comment": "Designed by Cm@BlackSpigotMC with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"tracerbullet": "overcraft:items/tracerbullet",
+		"tracerbullet":"overcraft:items/tracer_bullet",
 		"Voxel-00B5FF": "overcraft:items/voxel-00b5ff"
 	},
 	"elements": [
@@ -6869,5 +6869,28 @@
 				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#Voxel-00B5FF" }
 			}
 		}
-	]
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"scale":  [ 0.1, 0.1, 0.1 ]
+		},
+		"thirdperson_lefthand": {
+			"scale":  [ 0.1, 0.1, 0.1 ]
+		},
+		"firstperson_righthand": {
+			"translation":  [ 0, 2.0869, 0 ],
+			"scale":  [ 0.1, 0.1, 0.1 ]
+		},
+		"firstperson_lefthand": {
+			"translation":  [ 0, 2.0869, 0 ],
+			"scale":  [ 0.1, 0.1, 0.1 ]
+		},
+		"head": {
+			"translation":  [ 0, 18, 0 ],
+			"scale":  [ 4, 4, 4 ]
+		},
+		"ground": {
+			"scale":  [ 0.1, 0.1, 0.1 ]
+		}
+	}
 }
