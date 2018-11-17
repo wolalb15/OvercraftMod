@@ -44,7 +44,8 @@ public class TracerWeapon extends Item {
             bullet.setPosition(playerIn.posX, playerIn.posY + 1.5, playerIn.posZ);
             bullet.setDamage(100);
 
-            bullet.setVelocity(aim.x * 10, aim.y, aim.z * 10);
+            bullet.setVelocity(aim.x * 10, aim.y * 10, aim.z * 10);
+
             worldIn.spawnEntity(bullet);
         }
 

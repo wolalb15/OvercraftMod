@@ -2,12 +2,15 @@ package com.overcraft;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleBubble;
+import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
@@ -17,8 +20,10 @@ public class KeyHandler {
 
     @SubscribeEvent
     public void onKeyPressed(InputEvent.KeyInputEvent event){
-        if(OvercraftMod.ULTIMATE.isPressed()){
-            EntityPlayer player = Minecraft.getMinecraft().player;
+        EntityPlayer player = Minecraft.getMinecraft().player;
+        World worldIn = player.getEntityWorld();
+        if(OvercraftMod.ABILITY.isPressed()){
+
             Vec3d aim = player.getLookVec();
 
             Random rd = new Random();
@@ -32,7 +37,11 @@ public class KeyHandler {
             }
             player.setPositionAndUpdate(player.posX + (aim.x * 5),player.posY,player.posZ + (aim.z * 5));
         }
-
+    if(OvercraftMod.ULTIMATE.isPressed()){
+        EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn,player.posX,player.posY,player.posZ,player);
+        worldIn.spawnEntity(tnt);
+        worldIn.createExplosion(tnt,tnt.posX,tnt.posY,tnt.posZ,0,true);
+    }
 
     }
 }
