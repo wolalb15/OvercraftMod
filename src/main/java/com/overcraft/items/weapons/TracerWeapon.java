@@ -35,18 +35,18 @@ public class TracerWeapon extends Item {
         ItemStack item = playerIn.getHeldItem(handIn);
         Vec3d aim = playerIn.getLookVec();
         if(playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem()==Item.getByNameOrId("overcraft:tracer_bullet")
-                && playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getCount() != 0){
-            ItemStack slot =  playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
-            slot.setCount(slot.getCount()-1);
+                && playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getCount() != 0) {
+            ItemStack slot = playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
+            slot.setCount(slot.getCount() - 1);
+
+            EntityArrow bullet = new CustomArrow(worldIn, playerIn);
+            bullet.shoot(playerIn, 0, 0, 0, 100, 1);
+            bullet.setPosition(playerIn.posX, playerIn.posY + 1.5, playerIn.posZ);
+            bullet.setDamage(100);
+
+            bullet.setVelocity(aim.x * 10, aim.y, aim.z * 10);
+            worldIn.spawnEntity(bullet);
         }
-        EntityArrow bullet = new CustomArrow(worldIn,playerIn);
-        bullet.shoot(playerIn,0,0,0,100,1);
-        bullet.setPosition(playerIn.posX, playerIn.posY + 0.6, playerIn.posZ);
-        bullet.setDamage(100);
-
-        bullet.setVelocity(aim.x * 10,aim.y,aim.z * 10);
-        worldIn.spawnEntity(bullet);
-
 
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
     }

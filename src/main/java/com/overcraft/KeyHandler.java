@@ -17,7 +17,7 @@ public class KeyHandler {
 
     @SubscribeEvent
     public void onKeyPressed(InputEvent.KeyInputEvent event){
-        if(OvercraftMod.ult.isPressed()){
+        if(OvercraftMod.ULTIMATE.isPressed()){
             EntityPlayer player = Minecraft.getMinecraft().player;
             Vec3d aim = player.getLookVec();
 

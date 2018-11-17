@@ -29,7 +29,7 @@ public class OvercraftMod
     @Mod.Instance
     public static OvercraftMod instance;
 
-    public static KeyBinding ult = new KeyBinding("Ultimate",Keyboard.KEY_P,"category.OvercraftMod");
+    public static KeyBinding ULTIMATE = new KeyBinding("Ultimate",Keyboard.KEY_P,"category.OvercraftMod");
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -43,7 +43,7 @@ public class OvercraftMod
     {
         RenderingRegistry.registerEntityRenderingHandler(EntityComet.class, RenderComet::new);
         EntityRegistry.registerModEntity(new ResourceLocation(OvercraftMod.MODID, "comet"), EntityComet.class, "entity_dull_arrow", 0, "overcraft",80, 1, false);
-        ClientRegistry.registerKeyBinding(ult);
+        ClientRegistry.registerKeyBinding(ULTIMATE);
 
         FMLCommonHandler.instance().bus().register(new KeyHandler());
     }
