@@ -34,7 +34,7 @@ public class TracerWeapon extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack item = playerIn.getHeldItem(handIn);
         Vec3d aim = playerIn.getLookVec();
-        if(playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem()==Item.getByNameOrId("minecraft:stone")
+        if(playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem()==Item.getByNameOrId("overcraft:tracer_bullet")
                 && playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getCount() != 0){
             ItemStack slot =  playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
             slot.setCount(slot.getCount()-1);
