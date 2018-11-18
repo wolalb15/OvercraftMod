@@ -1,7 +1,7 @@
 {
   "__comment": "Designed by Cm@BlackSpigotMC with Cubik Studio - https://cubik.studio",
   "textures": {
-    "tracer": "overcraft:items/tracer"
+    "tracer": "overcraft:items/tracer_gun"
   },
   "elements": [
     {

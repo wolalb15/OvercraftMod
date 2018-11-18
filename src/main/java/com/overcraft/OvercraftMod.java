@@ -36,7 +36,7 @@ public class OvercraftMod
     @Mod.Instance
     public static OvercraftMod instance;
 
-    public static KeyBinding ULTIMATE = new KeyBinding("Ultimate",Keyboard.KEY_P,"category.OvercraftMod");
+    public static KeyBinding ULTIMATE = new KeyBinding("Ultimate",Keyboard.KEY_C,"category.OvercraftMod");
     public static KeyBinding ABILITY = new KeyBinding("Ability",Keyboard.KEY_V,"category.OvercraftMod");
 
     @EventHandler
