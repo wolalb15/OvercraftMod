@@ -53,10 +53,10 @@ public class TracerWeapon extends Item {
             System.out.println(direction);
             Vec3d nAim = aim.rotateYaw(90);
             if(direction) {
-                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + nAim.x, playerIn.posY + 1.5, playerIn.posZ + nAim.z);
+                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + nAim.x, playerIn.posY + 1.5, playerIn.posZ + nAim.z,false);
                 worldIn.spawnEntity(bullet);
             } else {
-                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX - nAim.x, playerIn.posY + 1.5, playerIn.posZ - nAim.z);
+                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX - nAim.x, playerIn.posY + 1.5, playerIn.posZ - nAim.z,false);
                 worldIn.spawnEntity(bullet);
             }
 

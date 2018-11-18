@@ -11,6 +11,15 @@ import net.minecraft.world.World;
 import paulscode.sound.Vector3D;
 
 public class EntityBullet extends Entity {
+	boolean isExplosive = false;
+	public EntityBullet(World worldIn, double x, double y, double z,boolean isExplosive) {
+		this(worldIn);
+		this.setPosition(x, y, z);
+		Vec3d aim = Minecraft.getMinecraft().player.getLookVec();
+		this.motionX = aim.x;
+		this.motionZ = aim.z;
+		this.isExplosive = isExplosive;
+	}
 
 	public EntityBullet(World worldIn, double x, double y, double z) {
 		this(worldIn);
@@ -27,7 +36,7 @@ public class EntityBullet extends Entity {
 
 	@Override
 	protected void entityInit() {
-		System.out.println("w�oghjweg");
+
 	}
 
 	@Override
@@ -54,8 +63,14 @@ public class EntityBullet extends Entity {
 
 	public void onImpact() {
 		this.setDead();
+		if(isExplosive){
+			world.createExplosion(this,posX,posY,posZ,1,false);
+		}
 	}
-	
+	public void setSpeed(double x, double z){
+		motionX = x;
+		motionZ = z;
+	}
 	protected float getGravityVelocity() {
 		return 0.01F;
 	}

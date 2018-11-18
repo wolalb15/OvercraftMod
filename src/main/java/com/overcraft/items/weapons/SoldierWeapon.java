@@ -4,6 +4,7 @@ import com.overcraft.custom.CustomParticle;
 import com.overcraft.custom.EntityBullet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -48,10 +49,10 @@ public class SoldierWeapon extends Item {
             System.out.println(direction);
             Vec3d nAim = aim.rotateYaw(90);
             if(direction) {
-                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + nAim.x, playerIn.posY + 1.5, playerIn.posZ + nAim.z);
+                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + nAim.x, playerIn.posY + 1.5, playerIn.posZ + nAim.z,false);
                 worldIn.spawnEntity(bullet);
             } else {
-                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX - nAim.x, playerIn.posY + 1.5, playerIn.posZ - nAim.z);
+                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX - nAim.x, playerIn.posY + 1.5, playerIn.posZ - nAim.z,false);
                 worldIn.spawnEntity(bullet);
             }
 
@@ -61,13 +62,13 @@ public class SoldierWeapon extends Item {
     }
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
     {
+        EntityPlayer playerIn = getPlayer();
         Vec3d aim = entityLiving.getLookVec();
         World world = entityLiving.getEntityWorld();
+        EntityBullet bullet = new EntityBullet(world,playerIn.posX + aim.x,playerIn.posY,playerIn.posZ + aim.z,true);
+        bullet.setSpeed(10,10);
+        world.spawnEntity(bullet);
 
-        CustomParticle cp = new CustomParticle(entityLiving.getEntityWorld(),entityLiving.posX, entityLiving.posY,entityLiving.posZ);
-        cp.setSize(20f,20f);
-        Minecraft.getMinecraft().effectRenderer.addEffect(cp);
-        entityLiving.setPositionAndUpdate(entityLiving.posX,entityLiving.posY,entityLiving.posZ);
         return false;
     }
 
@@ -75,5 +76,7 @@ public class SoldierWeapon extends Item {
     public void onKeyInput(InputEvent.KeyInputEvent event) {
 
     }
-
+    public EntityPlayer getPlayer(){
+        return Minecraft.getMinecraft().player;
+    }
 }
