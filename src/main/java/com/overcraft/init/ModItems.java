@@ -2,10 +2,8 @@ package com.overcraft.init;
 
 import com.overcraft.OvercraftMod;
 import com.overcraft.custom.EntityBullet;
-import com.overcraft.items.weapons.SoldierWeapon;
+import com.overcraft.items.weapons.*;
 import com.overcraft.renderer.RenderBullet;
-import com.overcraft.items.weapons.TracerBullet;
-import com.overcraft.items.weapons.TracerWeapon;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -19,7 +17,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = OvercraftMod.MODID)
 public class ModItems {
-    public static Item TRACER_WEAPON, TRACER_BULLET, SOLDIER_WEAPON; public static void preInit(){
+    public static Item TRACER_WEAPON, TRACER_BULLET, SOLDIER_WEAPON, GENJI_WEAPON_SHURIKEN,
+        GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE; public static void preInit(){
 
 
     }
@@ -27,12 +26,15 @@ public class ModItems {
         TRACER_WEAPON = new TracerWeapon("tracer_gun");
         TRACER_BULLET = new TracerBullet("tracer_bullet");
         SOLDIER_WEAPON = new SoldierWeapon("soldier_gun");
+        GENJI_WEAPON_SHURIKEN = new GenjiWeaponShuriken("genji_shuriken");
+        GENJI_WEAPON_TANTO = new GenjiWeaponTanto("genji_tanto");
+        GENJI_WEAPON_DRAGONBLADE = new GenjiWeaponDragonblade("genji_dragonblade");
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
     }
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(TRACER_WEAPON,
-                TRACER_BULLET, SOLDIER_WEAPON);
+                TRACER_BULLET, SOLDIER_WEAPON, GENJI_WEAPON_SHURIKEN, GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE);
     }
 
     @SubscribeEvent
@@ -40,6 +42,9 @@ public class ModItems {
         registerRenderer(TRACER_BULLET);
         registerRenderer(TRACER_WEAPON);
         registerRenderer(SOLDIER_WEAPON);
+        registerRenderer(GENJI_WEAPON_SHURIKEN);
+        registerRenderer(GENJI_WEAPON_TANTO);
+        registerRenderer(GENJI_WEAPON_DRAGONBLADE);
     }
 
     private static void registerRenderer(Item item) {
