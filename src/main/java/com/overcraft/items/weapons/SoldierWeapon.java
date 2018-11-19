@@ -66,7 +66,7 @@ public class SoldierWeapon extends Item {
         Vec3d aim = entityLiving.getLookVec();
         World world = entityLiving.getEntityWorld();
         EntityBullet bullet = new EntityBullet(world,playerIn.posX + aim.x,playerIn.posY,playerIn.posZ + aim.z,true);
-        bullet.setSpeed(10,10);
+        bullet.setSpeed(aim.x,aim.z);
         world.spawnEntity(bullet);
 
         return false;

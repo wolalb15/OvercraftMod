@@ -26,6 +26,7 @@ public class EntityBullet extends Entity {
 		this.setPosition(x, y, z);
 		Vec3d aim = Minecraft.getMinecraft().player.getLookVec();
 		this.motionX = aim.x;
+        this.motionY = aim.y;
 		this.motionZ = aim.z;
 	}
 
@@ -54,7 +55,7 @@ public class EntityBullet extends Entity {
 		this.posY += this.motionY;
 		this.posZ += this.motionZ;
 
-		this.motionY -= getGravityVelocity();
+		//this.motionY -= getGravityVelocity();
 		
 		if(world.getBlockState(this.getPosition()) != Blocks.AIR.getDefaultState()){
 			onImpact();
