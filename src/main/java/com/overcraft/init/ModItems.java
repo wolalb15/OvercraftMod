@@ -18,11 +18,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber(modid = OvercraftMod.MODID)
 public class ModItems {
     public static Item TRACER_WEAPON, TRACER_BULLET, SOLDIER_WEAPON, GENJI_WEAPON_SHURIKEN,
-        GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE;
-    public static void preInit(){
+        GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE, LUCIO_WEAPON;
 
+    public static void preInit(){}
 
-    }
     public static void init() {
         TRACER_WEAPON = new TracerWeapon("tracer_gun");
         TRACER_BULLET = new TracerBullet("tracer_bullet");
@@ -30,12 +29,14 @@ public class ModItems {
         GENJI_WEAPON_SHURIKEN = new GenjiWeaponShuriken("genji_shuriken");
         GENJI_WEAPON_TANTO = new GenjiWeaponTanto("genji_tanto");
         GENJI_WEAPON_DRAGONBLADE = new GenjiWeaponDragonblade("genji_dragonblade");
+        LUCIO_WEAPON = new LucioWeapon("lucio_gun");
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
     }
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(TRACER_WEAPON,
-                TRACER_BULLET, SOLDIER_WEAPON, GENJI_WEAPON_SHURIKEN, GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE);
+                TRACER_BULLET, SOLDIER_WEAPON, GENJI_WEAPON_SHURIKEN, GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE,
+                LUCIO_WEAPON);
     }
 
     @SubscribeEvent
@@ -46,6 +47,7 @@ public class ModItems {
         registerRenderer(GENJI_WEAPON_SHURIKEN);
         registerRenderer(GENJI_WEAPON_TANTO);
         registerRenderer(GENJI_WEAPON_DRAGONBLADE);
+        registerRenderer(LUCIO_WEAPON);
     }
 
     private static void registerRenderer(Item item) {
