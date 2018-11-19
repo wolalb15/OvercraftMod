@@ -28,7 +28,8 @@ public class GenjiWeaponDragonblade extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, null);
+        ItemStack item = playerIn.getHeldItem(handIn);
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
     }
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
     {
