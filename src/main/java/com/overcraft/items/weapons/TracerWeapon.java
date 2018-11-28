@@ -73,9 +73,4 @@ public class TracerWeapon extends Item {
         return false;
     }
 
-    @SubscribeEvent
-    public void onKeyInput(InputEvent.KeyInputEvent event) {
-
-    }
-
 }

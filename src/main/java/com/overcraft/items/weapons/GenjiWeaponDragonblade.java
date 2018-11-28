@@ -23,6 +23,7 @@ public class GenjiWeaponDragonblade extends Item {
         setRegistryName(name);
         setCreativeTab(CreativeTabs.COMBAT);
         setMaxStackSize(1);
+
     }
     boolean direction = true;
 
@@ -33,6 +34,7 @@ public class GenjiWeaponDragonblade extends Item {
     }
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
     {
+        setDamage(stack,10);
         return false;
     }
 
