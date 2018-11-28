@@ -53,7 +53,7 @@ public class TracerWeapon extends Item {
 
 
 
-                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + nAim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + nAim.z,false);
+                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + aim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + aim.z,false);
                 worldIn.spawnEntity(bullet);
 
 

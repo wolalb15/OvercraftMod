@@ -58,7 +58,7 @@ public class EntityBullet extends Entity {
 
 		//this.motionY -= getGravityVelocity();
 		
-		if(world.getBlockState(this.getPosition()) != Blocks.AIR.getDefaultState() || entity){
+		if(world.getBlockState(this.getPosition()) != Blocks.AIR.getDefaultState()){
 			onImpact();
 		}
 	}
