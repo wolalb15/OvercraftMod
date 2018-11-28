@@ -52,9 +52,9 @@ public class TracerWeapon extends Item {
 
 
 
-
+                if(worldIn.isRemote){
                 EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + aim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + aim.z,false);
-                worldIn.spawnEntity(bullet);
+                worldIn.spawnEntity(bullet);}
 
 
         }

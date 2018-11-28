@@ -3,14 +3,18 @@ package com.overcraft.custom;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import paulscode.sound.Vector3D;
 
-public class EntityBullet extends Entity {
+public class EntityBullet extends EntityThrowable {
 	boolean isExplosive = false;
 	public EntityBullet(World worldIn, double x, double y, double z,boolean isExplosive) {
 		this(worldIn);
@@ -57,11 +61,16 @@ public class EntityBullet extends Entity {
 		this.posZ += this.motionZ;
 
 		//this.motionY -= getGravityVelocity();
-		
+
+
 		if(world.getBlockState(this.getPosition()) != Blocks.AIR.getDefaultState()){
 			onImpact();
 		}
+		if(collided)
+			onImpact();
 	}
+
+
 
 	public void onImpact() {
 		this.setDead();
@@ -78,12 +87,20 @@ public class EntityBullet extends Entity {
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
+	protected void onImpact(RayTraceResult result) {
+		this.setDead();
+		if(isExplosive){
+			world.createExplosion(this,posX,posY,posZ,1,false);
+		}
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound compound) {
 
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound) {
+	public void writeEntityToNBT(NBTTagCompound compound) {
 
 	}
 
