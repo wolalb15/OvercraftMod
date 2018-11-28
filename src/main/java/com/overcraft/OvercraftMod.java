@@ -22,6 +22,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
+import java.rmi.registry.Registry;
+
 @Mod(modid = OvercraftMod.MODID, name = OvercraftMod.NAME, version = OvercraftMod.VERSION)
 public class OvercraftMod
 {
@@ -54,7 +56,6 @@ public class OvercraftMod
         EntityRegistry.registerModEntity(new ResourceLocation(OvercraftMod.MODID, "bullet"), EntityBullet.class, "entity_dull_arrow", 0, "overcraft",80, 1, false);
         ClientRegistry.registerKeyBinding(ULTIMATE);
         ClientRegistry.registerKeyBinding(ABILITY);
-
         FMLCommonHandler.instance().bus().register(new KeyHandler());
     }
     public static void load(){

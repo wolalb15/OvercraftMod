@@ -17,6 +17,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -29,14 +30,13 @@ public class TracerWeapon extends Item {
         setCreativeTab(CreativeTabs.COMBAT);
         setMaxStackSize(1);
     }
-    boolean direction = true;
-
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack item = playerIn.getHeldItem(handIn);
         Vec3d aim = playerIn.getLookVec();
         if(playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem()==Item.getByNameOrId("overcraft:tracer_bullet")
-                && playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getCount() != 0) {
+                && playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getCount() != 0
+                || Minecraft.getMinecraft().playerController.getCurrentGameType()==GameType.CREATIVE) {
             ItemStack slot = playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
             slot.setCount(slot.getCount() - 1);
 
@@ -48,17 +48,14 @@ public class TracerWeapon extends Item {
             bullet.setVelocity(aim.x * 10, aim.y * 10, aim.z * 10);
 
             worldIn.spawnEntity(bullet);*/
-            direction = !direction;
 
-            System.out.println(direction);
-            Vec3d nAim = aim.rotateYaw(90);
-            if(direction) {
-                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + nAim.x, playerIn.posY + 1.5, playerIn.posZ + nAim.z,false);
+
+
+
+
+                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + nAim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + nAim.z,false);
                 worldIn.spawnEntity(bullet);
-            } else {
-                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX - nAim.x, playerIn.posY + 1.5, playerIn.posZ - nAim.z,false);
-                worldIn.spawnEntity(bullet);
-            }
+
 
         }
 

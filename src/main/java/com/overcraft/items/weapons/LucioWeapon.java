@@ -2,6 +2,7 @@ package com.overcraft.items.weapons;
 
 import com.overcraft.custom.CustomParticle;
 import com.overcraft.custom.EntityBullet;
+import com.overcraft.init.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -80,7 +81,7 @@ public class LucioWeapon extends Item {
 
        try {
            EntityPlayer playerIn = Minecraft.getMinecraft().player;
-           if(Item.getIdFromItem(playerIn.getActiveItemStack().getItem()) == Item.getIdFromItem(this)) {
+           if(Item.getIdFromItem(playerIn.getActiveItemStack().getItem()) == Item.getIdFromItem(ModItems.LUCIO_WEAPON)) {
                playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 2, 2));
            }
        } catch (Exception exc){
