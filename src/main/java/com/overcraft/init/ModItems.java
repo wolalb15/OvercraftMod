@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber(modid = OvercraftMod.MODID)
 public class ModItems {
     public static Item TRACER_WEAPON, TRACER_BULLET, SOLDIER_WEAPON, GENJI_WEAPON_SHURIKEN,
-        GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE, LUCIO_WEAPON;
+        GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE, LUCIO_WEAPON, REINHARDT_WEAPON, MERCY_STAFF, MERCY_GUN;
 
     public static void preInit(){}
 
@@ -30,13 +30,16 @@ public class ModItems {
         GENJI_WEAPON_TANTO = new GenjiWeaponTanto("genji_tanto");
         GENJI_WEAPON_DRAGONBLADE = new GenjiWeaponDragonblade("genji_dragonblade");
         LUCIO_WEAPON = new LucioWeapon("lucio_gun");
+        REINHARDT_WEAPON = new ReinhardtWeapon("reinhardt_hammer");
+        MERCY_STAFF = new MercyStaff("mercy_staff");
+        MERCY_GUN = new MercyGun("mercy_gun");
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
     }
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(TRACER_WEAPON,
                 TRACER_BULLET, SOLDIER_WEAPON, GENJI_WEAPON_SHURIKEN, GENJI_WEAPON_TANTO, GENJI_WEAPON_DRAGONBLADE,
-                LUCIO_WEAPON);
+                LUCIO_WEAPON, REINHARDT_WEAPON, MERCY_STAFF, MERCY_GUN);
     }
 
     @SubscribeEvent
@@ -48,6 +51,9 @@ public class ModItems {
         registerRenderer(GENJI_WEAPON_TANTO);
         registerRenderer(GENJI_WEAPON_DRAGONBLADE);
         registerRenderer(LUCIO_WEAPON);
+        registerRenderer(REINHARDT_WEAPON);
+        registerRenderer(MERCY_STAFF);
+        registerRenderer(MERCY_GUN);
     }
 
     private static void registerRenderer(Item item) {
