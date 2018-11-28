@@ -4,11 +4,14 @@ import com.overcraft.custom.CustomParticle;
 import com.overcraft.custom.EntityBullet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -25,6 +28,7 @@ public class LucioWeapon extends Item {
         setMaxStackSize(1);
     }
     boolean direction = true;
+
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
@@ -70,6 +74,20 @@ public class LucioWeapon extends Item {
         entityLiving.setPositionAndUpdate(entityLiving.posX,entityLiving.posY,entityLiving.posZ);
         return false;
     }
+
+    @SubscribeEvent
+    public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag){
+
+       try {
+           EntityPlayer playerIn = Minecraft.getMinecraft().player;
+           if(Item.getIdFromItem(playerIn.getActiveItemStack().getItem()) == Item.getIdFromItem(this)) {
+               playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 2, 2));
+           }
+       } catch (Exception exc){
+
+       }
+        super.onUpdate(itemstack,world,entity,i,flag);
+       }
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
