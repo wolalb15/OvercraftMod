@@ -1,5 +1,6 @@
 package com.overcraft;
 
+import com.overcraft.init.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleBubble;
 import net.minecraft.entity.item.EntityTNTPrimed;
@@ -22,7 +23,7 @@ public class KeyHandler {
     public void onKeyPressed(InputEvent.KeyInputEvent event){
         EntityPlayer player = Minecraft.getMinecraft().player;
         World worldIn = player.getEntityWorld();
-        if(OvercraftMod.ABILITY.isPressed()){
+        if(OvercraftMod.ABILITY.isPressed() && player.inventory.getCurrentItem().isItemEqual(new ItemStack(ModItems.TRACER_WEAPON))){
 
             Vec3d aim = player.getLookVec();
 
@@ -37,6 +38,7 @@ public class KeyHandler {
             }
             player.setPositionAndUpdate(player.posX + (aim.x * 5),player.posY,player.posZ + (aim.z * 5));
         }
+
     if(OvercraftMod.ULTIMATE.isPressed()){
         EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn,player.posX,player.posY,player.posZ,player);
         worldIn.spawnEntity(tnt);

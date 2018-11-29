@@ -8,6 +8,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -82,9 +83,14 @@ public class LucioWeapon extends Item {
 
        try {
            EntityPlayer playerIn = Minecraft.getMinecraft().player;
-           if(Item.getIdFromItem(playerIn.getActiveItemStack().getItem()) == Item.getIdFromItem(ModItems.LUCIO_WEAPON)) {
-               playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 2, 2));
+           if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON)))
+                   &&! playerIn.getActivePotionEffects().contains(MobEffects.SPEED))
+                    {
+               playerIn.addPotionEffect(new PotionEffect(MobEffects.SPEED, 0, 1));
+           }else {
+               playerIn.removePotionEffect(MobEffects.SPEED);
            }
+
        } catch (Exception exc){
 
        }
