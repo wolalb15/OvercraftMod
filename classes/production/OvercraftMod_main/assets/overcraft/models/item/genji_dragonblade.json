@@ -810,12 +810,14 @@
 			"translation":  [ -2.782, 8.3478, 2.0869 ]
 		},
 		"firstperson_righthand": {
-			"rotation":  [ 84, 1, -116 ],
-			"translation":  [ -4.172, 9.7383, -1.384 ]
+			"rotation":  [ 100, 0, -100 ],
+			"translation":  [ -0.693, 7.6513, -1.384 ],
+			"scale":  [ 1, 0.7, 1 ]
 		},
 		"firstperson_lefthand": {
-			"rotation":  [ 84, 1, 64 ],
-			"translation":  [ -4.172, 9.7383, -1.384 ]
+			"rotation":  [ 100, 0, 80 ],
+			"translation":  [ -0.693, 7.6513, -1.384 ],
+			"scale":  [ 1, 0.7, 1 ]
 		},
 		"gui": {
 			"rotation":  [ 90, 0, 0 ]

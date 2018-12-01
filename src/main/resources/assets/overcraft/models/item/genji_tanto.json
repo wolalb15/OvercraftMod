@@ -349,9 +349,9 @@
 			"scale":  [ 0.4, 1, 0.4 ]
 		},
 		"firstperson_lefthand": {
-			"rotation":  [ 80, -2, 49 ],
-			"translation":  [ -4.869, 6.9565, 4.8698 ],
-			"scale":  [ 0.4, 1, 0.4 ]
+			"rotation":  [ 84, -2, 27 ],
+			"translation":  [ -5.563, 6.9565, 6.2611 ],
+			"scale":  [ 0.3, 1, 0.3 ]
 		},
 		"gui": {
 			"rotation":  [ 90, 0, 0 ]

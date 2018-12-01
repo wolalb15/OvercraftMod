@@ -576,14 +576,14 @@
 			"scale":  [ 0.8, 1, 0.8 ]
 		},
 		"firstperson_righthand": {
-			"rotation":  [ 87, 0, 75 ],
-			"translation":  [ 0.6956, 4.8695, -4.173 ],
-			"scale":  [ 0.9, 1, 0.9 ]
+			"rotation":  [ 90, 0, 80 ],
+			"translation":  [ 0.6956, 4.1738, -1.39 ],
+			"scale":  [ 0.8, 1, 0.7 ]
 		},
 		"firstperson_lefthand": {
-			"rotation":  [ 87, 0, -105 ],
-			"translation":  [ 0.6956, 4.8695, -4.173 ],
-			"scale":  [ 0.9, 1, 0.9 ]
+			"rotation":  [ 90, 0, -100 ],
+			"translation":  [ 0.6956, 4.1738, -1.39 ],
+			"scale":  [ 0.8, 1, 0.7 ]
 		},
 		"gui": {
 			"rotation":  [ 90, 0, 0 ]

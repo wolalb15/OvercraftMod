@@ -357,14 +357,14 @@
 			"scale":  [ 0.6, 1, 0.6 ]
 		},
 		"firstperson_righthand": {
-			"rotation":  [ 100, 0, 74 ],
-			"translation":  [ -0.695, 4.8695, 0.0009 ],
-			"scale":  [ 0.6, 1, 0.6 ]
+			"rotation":  [ 100, 0, 80 ],
+			"translation":  [ -1.391, 4.1738, 2.0878 ],
+			"scale":  [ 0.5, 1, 0.5 ]
 		},
 		"firstperson_lefthand": {
-			"rotation":  [ 100, 0, -96 ],
-			"translation":  [ -0.695, 4.8695, 0.0009 ],
-			"scale":  [ 0.6, 1, 0.6 ]
+			"rotation":  [ 100, 0, -100 ],
+			"translation":  [ -1.391, 4.1738, 2.0878 ],
+			"scale":  [ 0.5, 1, 0.5 ]
 		},
 		"gui": {
 			"rotation":  [ 90, 0, 0 ]
