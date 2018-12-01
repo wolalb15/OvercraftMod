@@ -81,22 +81,22 @@ public class LucioWeapon extends Item {
     @SubscribeEvent
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag){
 
-       try {
-           EntityPlayer playerIn = Minecraft.getMinecraft().player;
-           if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON))))
-                    {
-                        //playerIn.capabilities.setPlayerWalkSpeed(playerIn.capabilities.getWalkSpeed()*2);
-                        playerIn.motionX = playerIn.motionX*1.2;
-                        playerIn.motionZ = playerIn.motionZ*1.2;
-                    }else {
-               playerIn.capabilities.setPlayerWalkSpeed(playerIn.capabilities.getWalkSpeed());
-           }
+        try {
+            EntityPlayer playerIn = Minecraft.getMinecraft().player;
+            if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON)))&& playerIn.onGround)
+            {
+                playerIn.motionX = playerIn.motionX*1.2;
+                playerIn.motionZ = playerIn.motionZ*1.2;
+            }else {
+                playerIn.motionX = playerIn.motionX/1.2*0.8;
+                playerIn.motionZ = playerIn.motionZ/1.2*0.8;
+            }
 
-       } catch (Exception exc){
+        } catch (Exception exc){
 
-       }
+        }
         super.onUpdate(itemstack,world,entity,i,flag);
-       }
+    }
 
 
 }

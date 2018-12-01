@@ -19,7 +19,7 @@ import org.lwjgl.input.Keyboard;
 import java.util.Random;
 
 public class KeyHandler {
-boolean hasDoubleJumped = false;
+    boolean hasDoubleJumped = false, canDoubleJump = false;
     @SubscribeEvent
     public void onKeyPressed(InputEvent.KeyInputEvent event){
         EntityPlayer player = Minecraft.getMinecraft().player;
@@ -40,37 +40,40 @@ boolean hasDoubleJumped = false;
             player.setPositionAndUpdate(player.posX + (aim.x * 5),player.posY,player.posZ + (aim.z * 5));
         }
 
-    if(OvercraftMod.ULTIMATE.isPressed()){
-        EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn,player.posX,player.posY,player.posZ,player);
-        worldIn.spawnEntity(tnt);
-        if(tnt.isDead)
-        worldIn.createExplosion(player,tnt.posX,tnt.posY,tnt.posZ,0,true);
-    }
-    if(!player.isAirBorne) {
-        hasDoubleJumped = false;
-        System.out.println("setting false");}
-    if(Keyboard.getEventKey() == Keyboard.KEY_SPACE){
-        try {
-            EntityPlayer playerIn = Minecraft.getMinecraft().player;
-            if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.GENJI_WEAPON_DRAGONBLADE))))
-            {
-              if(player.isAirBorne) {
-                  if(!hasDoubleJumped) {
-                      playerIn.addVelocity(0, 0.5, 0);
-                      hasDoubleJumped = true;
-                      System.out.println("Double Jump");
-                  }
-              } else {
-                  hasDoubleJumped=false;
-              }
-            }else {
+        if(OvercraftMod.ULTIMATE.isPressed()){
+            EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn,player.posX,player.posY,player.posZ,player);
+            worldIn.spawnEntity(tnt);
+            if(tnt.isDead)
+                worldIn.createExplosion(player,tnt.posX,tnt.posY,tnt.posZ,0,true);
+        }
 
+            if(Keyboard.getEventKey() == Keyboard.KEY_SPACE){
+                try {
+                    EntityPlayer playerIn = Minecraft.getMinecraft().player;
+                    if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.GENJI_WEAPON_DRAGONBLADE))))
+                    {
+                        if(!player.onGround) {
+                            if(!hasDoubleJumped && canDoubleJump) {
+                                if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+                                playerIn.addVelocity(0, 0.5, 0);
+                                hasDoubleJumped = true;
+                                System.out.println("Double Jump");}
+                            } else {
+                                canDoubleJump=true;
+                            }
+                        } else {
+                            hasDoubleJumped=false;
+                            canDoubleJump=true;
+                        }
+                    }else {
+
+                    }
+
+                } catch (Exception exc){
+
+                }
             }
-
-        } catch (Exception exc){
 
         }
     }
 
-    }
-}
