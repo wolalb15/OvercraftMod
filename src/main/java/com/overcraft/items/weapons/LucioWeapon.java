@@ -83,12 +83,12 @@ public class LucioWeapon extends Item {
 
        try {
            EntityPlayer playerIn = Minecraft.getMinecraft().player;
-           if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON)))
-                   &&! playerIn.getActivePotionEffects().contains(MobEffects.SPEED))
+           if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON))))
                     {
-               playerIn.addPotionEffect(new PotionEffect(MobEffects.SPEED, 0, 1));
+                        playerIn.capabilities.setPlayerWalkSpeed(playerIn.capabilities.getWalkSpeed()/2);
+                        playerIn.motionY = playerIn.motionY/2;
            }else {
-               playerIn.removePotionEffect(MobEffects.SPEED);
+               playerIn.capabilities.setPlayerWalkSpeed(playerIn.capabilities.getWalkSpeed()*2);
            }
 
        } catch (Exception exc){

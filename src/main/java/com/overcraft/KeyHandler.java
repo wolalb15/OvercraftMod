@@ -42,7 +42,8 @@ public class KeyHandler {
     if(OvercraftMod.ULTIMATE.isPressed()){
         EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn,player.posX,player.posY,player.posZ,player);
         worldIn.spawnEntity(tnt);
-        worldIn.createExplosion(tnt,tnt.posX,tnt.posY,tnt.posZ,0,true);
+        if(tnt.isDead)
+        worldIn.createExplosion(player,tnt.posX,tnt.posY,tnt.posZ,0,true);
     }
 
     }
