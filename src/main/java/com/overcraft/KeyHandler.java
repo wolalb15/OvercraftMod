@@ -14,11 +14,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import org.lwjgl.input.Keyboard;
 
 import java.util.Random;
 
 public class KeyHandler {
-
+boolean hasDoubleJumped = false;
     @SubscribeEvent
     public void onKeyPressed(InputEvent.KeyInputEvent event){
         EntityPlayer player = Minecraft.getMinecraft().player;
@@ -44,6 +45,31 @@ public class KeyHandler {
         worldIn.spawnEntity(tnt);
         if(tnt.isDead)
         worldIn.createExplosion(player,tnt.posX,tnt.posY,tnt.posZ,0,true);
+    }
+    if(!player.isAirBorne) {
+        hasDoubleJumped = false;
+        System.out.println("setting false");}
+    if(Keyboard.getEventKey() == Keyboard.KEY_SPACE){
+        try {
+            EntityPlayer playerIn = Minecraft.getMinecraft().player;
+            if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.GENJI_WEAPON_DRAGONBLADE))))
+            {
+              if(player.isAirBorne) {
+                  if(!hasDoubleJumped) {
+                      playerIn.addVelocity(0, 0.5, 0);
+                      hasDoubleJumped = true;
+                      System.out.println("Double Jump");
+                  }
+              } else {
+                  hasDoubleJumped=false;
+              }
+            }else {
+
+            }
+
+        } catch (Exception exc){
+
+        }
     }
 
     }

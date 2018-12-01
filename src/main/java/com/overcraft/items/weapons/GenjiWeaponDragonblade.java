@@ -2,8 +2,10 @@ package com.overcraft.items.weapons;
 
 import com.overcraft.custom.CustomParticle;
 import com.overcraft.custom.EntityBullet;
+import com.overcraft.init.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -32,6 +34,13 @@ public class GenjiWeaponDragonblade extends Item {
         ItemStack item = playerIn.getHeldItem(handIn);
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
     }
+
+    @SubscribeEvent
+    public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag){
+
+
+        super.onUpdate(itemstack,world,entity,i,flag);
+    }
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
     {
         Vec3d aim = entityLiving.getLookVec();
@@ -42,6 +51,7 @@ public class GenjiWeaponDragonblade extends Item {
         Minecraft.getMinecraft().effectRenderer.addEffect(cp);
         entityLiving.setPositionAndUpdate(entityLiving.posX,entityLiving.posY,entityLiving.posZ);
         return true;
+
     }
 
 }

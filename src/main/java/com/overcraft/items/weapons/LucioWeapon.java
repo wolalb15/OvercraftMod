@@ -85,10 +85,11 @@ public class LucioWeapon extends Item {
            EntityPlayer playerIn = Minecraft.getMinecraft().player;
            if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON))))
                     {
-                        playerIn.capabilities.setPlayerWalkSpeed(playerIn.capabilities.getWalkSpeed()/2);
-                        playerIn.motionY = playerIn.motionY/2;
-           }else {
-               playerIn.capabilities.setPlayerWalkSpeed(playerIn.capabilities.getWalkSpeed()*2);
+                        //playerIn.capabilities.setPlayerWalkSpeed(playerIn.capabilities.getWalkSpeed()*2);
+                        playerIn.motionX = playerIn.motionX*1.2;
+                        playerIn.motionZ = playerIn.motionZ*1.2;
+                    }else {
+               playerIn.capabilities.setPlayerWalkSpeed(playerIn.capabilities.getWalkSpeed());
            }
 
        } catch (Exception exc){
