@@ -53,7 +53,7 @@ public class OvercraftMod
     {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
-        EntityRegistry.registerModEntity(new ResourceLocation(OvercraftMod.MODID, "bullet"), EntityBullet.class, "entity_dull_arrow", 0, "overcraft",80, 1, false);
+        EntityRegistry.registerModEntity(new ResourceLocation(OvercraftMod.MODID, "bullet"), EntityBullet.class, "entity_bullet", 0, "overcraft",80, 1, false);
         ClientRegistry.registerKeyBinding(ULTIMATE);
         ClientRegistry.registerKeyBinding(ABILITY);
         FMLCommonHandler.instance().bus().register(new KeyHandler());

@@ -48,33 +48,34 @@ public class KeyHandler {
                 worldIn.createExplosion(player,tnt.posX,tnt.posY,tnt.posZ,0,true);
         }
 
-            if(Keyboard.getEventKey() == Keyboard.KEY_SPACE){
-                try {
-                    EntityPlayer playerIn = Minecraft.getMinecraft().player;
-                    if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.GENJI_WEAPON_DRAGONBLADE))))
-                    {
-                        if(!player.onGround) {
-                            if(!hasDoubleJumped && canDoubleJump) {
-                                if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+        if(Keyboard.getEventKey() == Keyboard.KEY_SPACE){
+            try {
+                EntityPlayer playerIn = Minecraft.getMinecraft().player;
+                if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.GENJI_WEAPON_DRAGONBLADE))))
+                {
+                    if(!player.onGround) {
+                        if(!hasDoubleJumped && canDoubleJump) {
+                            if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+                                player.motionY=0;
                                 playerIn.addVelocity(0, 0.5, 0);
                                 hasDoubleJumped = true;
                                 System.out.println("Double Jump");}
-                            } else {
-                                canDoubleJump=true;
-                            }
                         } else {
-                            hasDoubleJumped=false;
                             canDoubleJump=true;
                         }
-                    }else {
-
+                    } else {
+                        hasDoubleJumped=false;
+                        canDoubleJump=true;
                     }
-
-                } catch (Exception exc){
+                }else {
 
                 }
-            }
 
+            } catch (Exception exc){
+
+            }
         }
+
     }
+}
 
