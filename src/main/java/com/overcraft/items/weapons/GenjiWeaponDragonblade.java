@@ -59,15 +59,15 @@ public class GenjiWeaponDragonblade extends ItemSword {
 
     }
 
+
+    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+        return false;
+
+    }
     @Override
     public boolean hitEntity(ItemStack item, EntityLivingBase entity, EntityLivingBase player)
     {
         item.damageItem(0, player);
         return true;
-    }
-
-    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
-        return false;
-
     }
 }
