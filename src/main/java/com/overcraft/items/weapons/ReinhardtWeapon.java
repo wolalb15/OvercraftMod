@@ -2,6 +2,7 @@ package com.overcraft.items.weapons;
 
 import com.overcraft.custom.CustomParticle;
 import com.overcraft.custom.EntityBullet;
+import com.overcraft.custom.EntityShield;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,6 +32,7 @@ public class ReinhardtWeapon extends Item {
         ItemStack item = playerIn.getHeldItem(handIn);
         Vec3d aim = playerIn.getLookVec();
 
+        worldIn.spawnEntity(new EntityShield(worldIn,playerIn.posX,playerIn.posY,playerIn.posZ));
 
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
     }

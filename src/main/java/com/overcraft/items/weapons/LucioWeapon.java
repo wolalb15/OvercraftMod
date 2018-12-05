@@ -24,13 +24,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
 public class LucioWeapon extends Item {
+
     public LucioWeapon(String name) {
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(CreativeTabs.COMBAT);
         setMaxStackSize(1);
     }
-
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
@@ -80,16 +80,15 @@ public class LucioWeapon extends Item {
 
     @SubscribeEvent
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag){
-
         try {
             EntityPlayer playerIn = Minecraft.getMinecraft().player;
             if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON)))&& playerIn.onGround)
             {
+
                 playerIn.motionX = playerIn.motionX*1.2;
                 playerIn.motionZ = playerIn.motionZ*1.2;
             }else {
-                playerIn.motionX = playerIn.motionX/1.2*0.8;
-                playerIn.motionZ = playerIn.motionZ/1.2*0.8;
+
             }
 
         } catch (Exception exc){
