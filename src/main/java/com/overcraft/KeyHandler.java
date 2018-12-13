@@ -1,5 +1,6 @@
 package com.overcraft;
 
+import com.overcraft.controller.Controller;
 import com.overcraft.init.ModItems;
 import com.overcraft.items.weapons.GenjiWeaponDragonblade;
 import net.minecraft.client.Minecraft;
@@ -13,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Keyboard;
@@ -76,6 +79,11 @@ public class KeyHandler {
             }
         }
 
+    }
+
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load event){
+        Controller.createShield();
     }
 }
 

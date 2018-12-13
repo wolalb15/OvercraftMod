@@ -22,7 +22,7 @@ public class RenderShield extends Render<EntityShield> {
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(getEntityTexture(entity));
 		GlStateManager.translate(x, y, z);
-		this.model.render(entity, 0, 0, 0, 0, 0, 2);
+		this.model.render(entity, 0, 0, 0, 0, 0, 1);
 		GlStateManager.translate(-x, -y, -z);
 	}
 	

@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 
 public class ModelShield extends ModelBase {
 
-	ModelRenderer box1;
+	ModelRenderer box1,box2;
 
 
 	public ModelShield() {
@@ -17,16 +17,18 @@ public class ModelShield extends ModelBase {
 		float z = 0.5F;
 		
 		box1 = new ModelRenderer(this, 0, 0);
-		box1.addBox(0, 0, 0, 200, 200, 1);
+		box1.addBox(0, 0, 0, 5, 2, 1);
 		box1.setRotationPoint(0F, 0F, 0F);
-		box1.setTextureSize(32, 32);
+		box1.setTextureSize(5, 2);
 		box1.mirror = true;
+
 	}
 
 	@Override
 	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 		super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
 		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-		this.box1.render(scale);}
+		this.box1.render(scale);
+	}
 
 }

@@ -1,6 +1,8 @@
 package com.overcraft;
 
+import com.overcraft.controller.Controller;
 import com.overcraft.custom.EntityBullet;
+import com.overcraft.custom.EntityShield;
 import com.overcraft.renderer.RenderBullet;
 import com.overcraft.init.ModItems;
 
@@ -38,6 +40,8 @@ public class OvercraftMod
     @Mod.Instance
     public static OvercraftMod instance;
 
+    public Controller controller = new Controller();
+
     public static KeyBinding ULTIMATE = new KeyBinding("Ultimate",Keyboard.KEY_C,"category.OvercraftMod");
     public static KeyBinding ABILITY = new KeyBinding("Ability",Keyboard.KEY_V,"category.OvercraftMod");
 
@@ -54,10 +58,14 @@ public class OvercraftMod
 
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
         EntityRegistry.registerModEntity(new ResourceLocation(OvercraftMod.MODID, "bullet"), EntityBullet.class, "entity_bullet", 0, "overcraft",80, 1, false);
+        EntityRegistry.registerModEntity(new ResourceLocation(OvercraftMod.MODID, "shield"), EntityShield.class, "entity_shield", 0, "overcraft",80, 1, false);
+
         ClientRegistry.registerKeyBinding(ULTIMATE);
         ClientRegistry.registerKeyBinding(ABILITY);
         FMLCommonHandler.instance().bus().register(new KeyHandler());
     }
+
+
     public static void load(){
                MinecraftForge.EVENT_BUS.register(instance);
     }

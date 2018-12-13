@@ -75,7 +75,7 @@ public class EntityBullet extends EntityThrowable {
 	public void onImpact() {
 		this.setDead();
 		if(isExplosive){
-			world.createExplosion(this,posX,posY,posZ,1,false);
+			world.createExplosion(this,posX,posY,posZ,0.5f,false);
 		}
 	}
 	public void setSpeed(double x, double z){

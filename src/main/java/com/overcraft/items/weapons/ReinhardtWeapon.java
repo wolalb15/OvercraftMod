@@ -1,10 +1,12 @@
 package com.overcraft.items.weapons;
 
+import com.overcraft.controller.Controller;
 import com.overcraft.custom.CustomParticle;
 import com.overcraft.custom.EntityBullet;
 import com.overcraft.custom.EntityShield;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -26,13 +28,14 @@ public class ReinhardtWeapon extends Item {
         setMaxStackSize(1);
     }
     boolean direction = true;
-
+    EntityShield shield = null;
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack item = playerIn.getHeldItem(handIn);
         Vec3d aim = playerIn.getLookVec();
-
-        worldIn.spawnEntity(new EntityShield(worldIn,playerIn.posX,playerIn.posY,playerIn.posZ));
+        if(shield == null){shield = Controller.getShield();}
+        else{shield.setPosition(playerIn.posX,playerIn.posY,playerIn.posZ);}
+        worldIn.spawnEntity(shield);
 
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
     }
@@ -46,6 +49,17 @@ public class ReinhardtWeapon extends Item {
         Minecraft.getMinecraft().effectRenderer.addEffect(cp);
         entityLiving.setPositionAndUpdate(entityLiving.posX,entityLiving.posY,entityLiving.posZ);
         return false;
+    }
+
+
+    @SubscribeEvent
+    public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag){
+            try {
+                EntityPlayer player = Minecraft.getMinecraft().player;
+                shield.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+            } catch (NullPointerException e) {
+                System.out.println(e);
+            }
     }
 
     @SubscribeEvent
