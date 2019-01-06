@@ -7,9 +7,11 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityShield extends Entity {
 
@@ -20,6 +22,7 @@ public class EntityShield extends Entity {
 		this.motionX = aim.x;
 		this.motionY = aim.y;
 		this.motionZ = aim.z;
+		this.setSize(6,2);
 	}
 
 
@@ -43,7 +46,14 @@ public class EntityShield extends Entity {
 
 	}
 
-
+	@SubscribeEvent
+	public void setPosition(double par1, double par2, double par3) {
+		AxisAlignedBB b = this.getEntityBoundingBox();
+		double boxSX = b.maxX - b.minX;
+		double boxSY = b.maxY - b.minY;
+		double boxSZ = b.maxZ - b.minZ;
+		this.setEntityBoundingBox((new AxisAlignedBB(posX - boxSX/2D, posY, posZ - boxSZ/2D, posX + boxSX/2D, posY + boxSY, posZ + boxSZ/2D)));
+	}
 
 
 	@Override
@@ -55,5 +65,6 @@ public class EntityShield extends Entity {
 	public void writeEntityToNBT(NBTTagCompound compound) {
 
 	}
+
 
 }

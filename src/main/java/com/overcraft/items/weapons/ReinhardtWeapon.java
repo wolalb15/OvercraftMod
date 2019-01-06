@@ -32,11 +32,17 @@ public class ReinhardtWeapon extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack item = playerIn.getHeldItem(handIn);
-        Vec3d aim = playerIn.getLookVec();
-        if(shield == null){shield = Controller.getShield();}
-        else{shield.setPosition(playerIn.posX,playerIn.posY,playerIn.posZ);}
-        worldIn.spawnEntity(shield);
+        try {
+            Vec3d aim = playerIn.getLookVec();
+            if (shield == null) {
+                shield = Controller.getShield();
+            } else {
+                shield.setPosition(playerIn.posX, playerIn.posY, playerIn.posZ);
+            }
+            worldIn.spawnEntity(shield);
+        } catch(Exception e){
 
+        }
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
     }
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
@@ -55,8 +61,13 @@ public class ReinhardtWeapon extends Item {
     @SubscribeEvent
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag){
             try {
-                EntityPlayer player = Minecraft.getMinecraft().player;
-                shield.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+                if(Controller.isShieldActive) {
+                    EntityPlayer player = Minecraft.getMinecraft().player;
+                    shield.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+                }
+                else{
+                    world.removeEntity(shield);
+                }
             } catch (NullPointerException e) {
                 System.out.println(e);
             }

@@ -7,9 +7,10 @@ import net.minecraft.world.World;
 
 public class Controller {
     private static EntityShield shield;
+    public static boolean isShieldActive = false;
 
-    public static EntityShield getShield(){
-        if(shield == null)
+    public static EntityShield getShield() {
+        if (shield == null)
             createShield();
 
         return shield;
@@ -20,8 +21,20 @@ public class Controller {
             World world = Minecraft.getMinecraft().world;
             EntityPlayer player = Minecraft.getMinecraft().player;
             shield = new EntityShield(world, player.posX, player.posY, player.posZ);
+            setShieldActive(true);
         } catch (Exception e) {
-            System.out.println(e);
+
         }
+    }
+
+    public static void removeShield() {
+        if (shield != null) {
+            isShieldActive = false;
+            System.out.println("removeShield");
+        }
+    }
+
+    public static void setShieldActive(boolean active) {
+        isShieldActive = active;
     }
 }

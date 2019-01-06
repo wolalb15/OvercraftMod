@@ -16,11 +16,12 @@ public class ModelShield extends ModelBase {
 		float y = -11.0F;
 		float z = 0.5F;
 		
-		box1 = new ModelRenderer(this, 0, 0);
-		box1.addBox(0, 0, 0, 5, 2, 1);
+		box1 = new ModelRenderer(this, 2, 2);
+		box1.addBox(-3, 0, -3, 5, 2, 1);
 		box1.setRotationPoint(0F, 0F, 0F);
-		box1.setTextureSize(5, 2);
+		box1.setTextureSize(6, 2);
 		box1.mirror = true;
+
 
 	}
 

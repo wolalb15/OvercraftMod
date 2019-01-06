@@ -1,6 +1,7 @@
 package com.overcraft.items.weapons;
 
 import com.overcraft.custom.CustomParticle;
+import com.overcraft.custom.EntityBoop;
 import com.overcraft.custom.EntityBullet;
 import com.overcraft.init.ModItems;
 import net.minecraft.client.Minecraft;
@@ -55,7 +56,7 @@ public class LucioWeapon extends Item {
 
 
             if(worldIn.isRemote){
-                EntityBullet bullet = new EntityBullet(worldIn, playerIn.posX + aim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + aim.z,false);
+                EntityBoop bullet = new EntityBoop(worldIn, playerIn.posX + aim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + aim.z,false);
                 worldIn.spawnEntity(bullet);}
 
 

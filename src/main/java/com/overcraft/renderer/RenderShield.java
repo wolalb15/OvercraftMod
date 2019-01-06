@@ -29,7 +29,7 @@ public class RenderShield extends Render<EntityShield> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityShield entity)
 	{
-		return new ResourceLocation("overcraft:textures/items/voxel-00b5ff.png");
+		return new ResourceLocation("overcraft:textures/items/blue.png");
 	}
 
 }

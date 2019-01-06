@@ -1,9 +1,11 @@
 package com.overcraft.init;
 
 import com.overcraft.OvercraftMod;
+import com.overcraft.custom.EntityBoop;
 import com.overcraft.custom.EntityBullet;
 import com.overcraft.custom.EntityShield;
 import com.overcraft.items.weapons.*;
+import com.overcraft.renderer.RenderBoop;
 import com.overcraft.renderer.RenderBullet;
 
 import com.overcraft.renderer.RenderShield;
@@ -36,6 +38,7 @@ public class ModItems {
         MERCY_STAFF = new MercyStaff("mercy_staff");
         MERCY_GUN = new MercyGun("mercy_gun");
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityBoop.class, RenderBoop::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityShield.class, RenderShield::new);
 
     }

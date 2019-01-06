@@ -3,23 +3,17 @@ package com.overcraft.custom;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.util.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import paulscode.sound.Vector3D;
 
-public class EntityBullet extends EntityThrowable {
+public class EntityBoop extends EntityThrowable {
 	boolean isExplosive = false;
-	public EntityBullet(World worldIn, double x, double y, double z,boolean isExplosive) {
+	public EntityBoop(World worldIn, double x, double y, double z, boolean isExplosive) {
 		this(worldIn);
 		this.setPosition(x, y, z);
 		Vec3d aim = Minecraft.getMinecraft().player.getLookVec();
@@ -29,7 +23,7 @@ public class EntityBullet extends EntityThrowable {
 		this.isExplosive = isExplosive;
 	}
 
-	public EntityBullet(World worldIn, double x, double y, double z) {
+	public EntityBoop(World worldIn, double x, double y, double z) {
 		this(worldIn);
 		this.setPosition(x, y, z);
 		Vec3d aim = Minecraft.getMinecraft().player.getLookVec();
@@ -38,7 +32,7 @@ public class EntityBullet extends EntityThrowable {
 		this.motionZ = aim.z;
 	}
 
-	public EntityBullet(World worldIn) {
+	public EntityBoop(World worldIn) {
 		super(worldIn);
 		this.setSize(0.8F, 0.8F);
 	}
