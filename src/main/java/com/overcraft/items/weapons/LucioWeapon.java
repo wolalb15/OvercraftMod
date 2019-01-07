@@ -1,5 +1,6 @@
 package com.overcraft.items.weapons;
 
+import com.overcraft.controller.Controller;
 import com.overcraft.custom.CustomParticle;
 import com.overcraft.custom.EntityBoop;
 import com.overcraft.custom.EntityBullet;
@@ -24,8 +25,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
-public class LucioWeapon extends Item {
+import java.util.Collection;
 
+public class LucioWeapon extends Item {
+    public PotionEffect healing = new PotionEffect(Potion.getPotionById(10), 5, 0);
     public LucioWeapon(String name) {
         setUnlocalizedName(name);
         setRegistryName(name);
@@ -83,15 +86,23 @@ public class LucioWeapon extends Item {
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag){
         try {
             EntityPlayer playerIn = Minecraft.getMinecraft().player;
-            if( playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON)))&& playerIn.onGround)
-            {
+            if(Controller.lucioSpeed) {
+                Collection<PotionEffect> effects = playerIn.getActivePotionEffects();
+                for (PotionEffect effect: effects) {
+                    playerIn.removePotionEffect(effect.getPotion());
+                }
+                if (playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.LUCIO_WEAPON))) && playerIn.onGround) {
 
-                playerIn.motionX = playerIn.motionX*1.2;
-                playerIn.motionZ = playerIn.motionZ*1.2;
+                    playerIn.motionX = playerIn.motionX * 1.2;
+                    playerIn.motionZ = playerIn.motionZ * 1.2;
+                }
             }else {
 
+                if (playerIn.ticksExisted % 20 == 0) {
+                    playerIn.addPotionEffect(healing);
+                    playerIn.setHealth(playerIn.getHealth() + 0.5f);
+                }
             }
-
         } catch (Exception exc){
 
         }

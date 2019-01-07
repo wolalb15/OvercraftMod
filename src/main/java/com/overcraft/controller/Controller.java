@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 public class Controller {
     private static EntityShield shield;
-    public static boolean isShieldActive = false;
+    public static boolean isShieldActive = false, lucioSpeed = true;
 
     public static EntityShield getShield() {
         if (shield == null)

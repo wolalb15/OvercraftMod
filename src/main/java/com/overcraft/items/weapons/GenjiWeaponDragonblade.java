@@ -33,7 +33,7 @@ import java.util.UUID;
 
 public class GenjiWeaponDragonblade extends ItemSword {
     public static final Item.ToolMaterial GENJI_DRAGONBLADE_MATERIAL = EnumHelper.addToolMaterial("GENJI_MATERIAL", 0, -1,
-            0, 100, 0).setRepairItem(new ItemStack(Items.IRON_INGOT));
+            0, 10, 0).setRepairItem(new ItemStack(Items.IRON_INGOT));
 
 
     public GenjiWeaponDragonblade(String name) {
