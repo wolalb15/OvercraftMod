@@ -3,11 +3,13 @@ package com.overcraft.init;
 import com.overcraft.OvercraftMod;
 import com.overcraft.custom.EntityBoop;
 import com.overcraft.custom.EntityBullet;
+import com.overcraft.custom.EntityFirestrike;
 import com.overcraft.custom.EntityShield;
 import com.overcraft.items.weapons.*;
 import com.overcraft.renderer.RenderBoop;
 import com.overcraft.renderer.RenderBullet;
 
+import com.overcraft.renderer.RenderFirestrike;
 import com.overcraft.renderer.RenderShield;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -40,6 +42,7 @@ public class ModItems {
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderBullet::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityBoop.class, RenderBoop::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityShield.class, RenderShield::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFirestrike.class, RenderFirestrike::new);
 
     }
 

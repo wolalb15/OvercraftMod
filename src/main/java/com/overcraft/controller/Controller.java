@@ -30,7 +30,7 @@ public class Controller {
     public static void removeShield() {
         if (shield != null) {
             isShieldActive = false;
-            System.out.println("removeShield");
+            shield.setDead();
         }
     }
 

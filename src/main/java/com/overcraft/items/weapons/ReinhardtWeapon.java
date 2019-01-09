@@ -69,7 +69,6 @@ public class ReinhardtWeapon extends Item {
                     world.removeEntity(shield);
                 }
             } catch (NullPointerException e) {
-                System.out.println(e);
             }
     }
 

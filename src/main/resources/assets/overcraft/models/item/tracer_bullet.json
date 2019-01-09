@@ -2,7 +2,7 @@
 	"__comment": "Designed by Cm@BlackSpigotMC with Cubik Studio - https://cubik.studio",
 	"textures": {
 		"tracerbullet":"overcraft:items/tracer_bullet",
-		"Voxel-00B5FF": "overcraft:items/voxel-00b5ff"
+		"Voxel-00B5FF": "overcraft:items/blue.png"
 	},
 	"elements": [
 		{
