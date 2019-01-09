@@ -19,6 +19,8 @@ import paulscode.sound.Vector3D;
 
 public class EntityBullet extends EntityThrowable {
 	boolean isExplosive = false;
+	double defMotionY;
+
 	public EntityBullet(World worldIn, double x, double y, double z,boolean isExplosive) {
 		this(worldIn);
 		this.setPosition(x, y, z);
@@ -27,6 +29,8 @@ public class EntityBullet extends EntityThrowable {
 		this.motionY = aim.y;
 		this.motionZ = aim.z;
 		this.isExplosive = isExplosive;
+
+		defMotionY =  this.motionY;
 	}
 
 	public EntityBullet(World worldIn, double x, double y, double z) {
@@ -36,6 +40,7 @@ public class EntityBullet extends EntityThrowable {
 		this.motionX = aim.x;
         this.motionY = aim.y;
 		this.motionZ = aim.z;
+
 	}
 
 	public EntityBullet(World worldIn) {
@@ -59,11 +64,14 @@ public class EntityBullet extends EntityThrowable {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
+
+		this.motionY = defMotionY;
+
 		this.posX += this.motionX;
 		this.posY += this.motionY;
 		this.posZ += this.motionZ;
 
-		//this.motionY -= getGravityVelocity();
+
 
 
 	}

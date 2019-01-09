@@ -84,90 +84,89 @@ public class KeyHandler {
     public void onKeyPressed(InputEvent.KeyInputEvent event) {
         EntityPlayer player = Minecraft.getMinecraft().player;
         /*****************************************************************************
-            IF ABILITY IS PRESSED
+         IF ABILITY IS PRESSED
          *********************************************************************************/
 
         World worldIn = player.getEntityWorld();
 
         if (OvercraftMod.ABILITY.isPressed()) {
-            if (isInHand(ModItems.TRACER_WEAPON)) {
-            //_____________________________________________
-            //TRACER
 
-            if (isInHand(ModItems.TRACER_WEAPON)) {
+                //_____________________________________________
+                //TRACER
 
-                Vec3d aim = player.getLookVec();
+                if (isInHand(ModItems.TRACER_WEAPON)) {
 
-                Random rd = new Random();
-                int zz = 0;
-                double zzD;
-                for (int i = 0; i < 150; i++) {
-                    zz = rd.nextInt(50) - 25;
-                    zzD = (double) zz / 100;
-                    player.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_SPLASH, player.posX + zzD, player.posY + 1.25 + zzD, player.posZ + zzD, 1, 1, 1, 1);
+                    Vec3d aim = player.getLookVec();
+
+                    Random rd = new Random();
+                    int zz = 0;
+                    double zzD;
+                    for (int i = 0; i < 150; i++) {
+                        zz = rd.nextInt(50) - 25;
+                        zzD = (double) zz / 100;
+                        player.getEntityWorld().spawnParticle(EnumParticleTypes.WATER_SPLASH, player.posX + zzD, player.posY + 1.25 + zzD, player.posZ + zzD, 1, 1, 1, 1);
+                    }
+                    if (!reverse) {
+                        player.setPositionAndUpdate(player.posX + (aim.x * 5), player.posY, player.posZ + (aim.z * 5));
+                    } else {
+                        player.setPositionAndUpdate(player.posX + (aim.x * -5), player.posY, player.posZ + (aim.z * -5));
+                    }
                 }
-                if (!reverse) {
-                    player.setPositionAndUpdate(player.posX + (aim.x * 5), player.posY, player.posZ + (aim.z * 5));
-                } else {
-                    player.setPositionAndUpdate(player.posX + (aim.x * -5), player.posY, player.posZ + (aim.z * -5));
+                //_____________________________________________
+                //LUCIO
+                if (isInHand(ModItems.LUCIO_WEAPON)) {
+                    Controller.lucioSpeed = !Controller.lucioSpeed;
+                    FontRenderer fRender = Minecraft.getMinecraft().fontRenderer;
+                    new GUINotification(Minecraft.getMinecraft());
+
+                }
+
+                //_________________________________________________
+                //REINHARDT
+                if (isInHand(ModItems.REINHARDT_WEAPON)) {
+                    worldIn.spawnEntity(new EntityFirestrike(worldIn, player.posX, player.posY, player.posZ));
                 }
             }
-            //_____________________________________________
-            //LUCIO
-            if(isInHand(ModItems.LUCIO_WEAPON)){
-                Controller.lucioSpeed = !Controller.lucioSpeed;
-                FontRenderer fRender = Minecraft.getMinecraft().fontRenderer;
-                new GUINotification(Minecraft.getMinecraft());
-
+            /*****************************************************************************
+             IF ULTIMATE IS PRESSED
+             *********************************************************************************/
+            if (OvercraftMod.ULTIMATE.isPressed()) {
+                EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn, player.posX, player.posY, player.posZ, player);
+                worldIn.spawnEntity(tnt);
+                if (tnt.isDead)
+                    worldIn.createExplosion(player, tnt.posX, tnt.posY, tnt.posZ, 0, true);
             }
 
-            //_________________________________________________
-            //REINHARDT
-            if(isInHand(ModItems.REINHARDT_WEAPON)){
-                worldIn.spawnEntity(new EntityFirestrike(worldIn,player.posX,player.posY, player.posZ));
-            }
-        }
-        /*****************************************************************************
-         IF ULTIMATE IS PRESSED
-         *********************************************************************************/
-        if (OvercraftMod.ULTIMATE.isPressed()) {
-            EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn, player.posX, player.posY, player.posZ, player);
-            worldIn.spawnEntity(tnt);
-            if (tnt.isDead)
-                worldIn.createExplosion(player, tnt.posX, tnt.posY, tnt.posZ, 0, true);
-        }
-
-        /*****************************************************************************
-         IF SPACE IS PRESSED
-         *********************************************************************************/
-        if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
-            try {
-                EntityPlayer playerIn = Minecraft.getMinecraft().player;
-                if (playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.GENJI_WEAPON_DRAGONBLADE)))) {
-                    if (!player.onGround) {
-                        if (!hasDoubleJumped && canDoubleJump) {
-                            if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-                                player.motionY = 0;
-                                playerIn.addVelocity(0, 0.65, 0);
-                                hasDoubleJumped = true;
-                                System.out.println("Double Jump");
+            /*****************************************************************************
+             IF SPACE IS PRESSED
+             *********************************************************************************/
+            if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
+                try {
+                    EntityPlayer playerIn = Minecraft.getMinecraft().player;
+                    if (playerIn.inventory.getCurrentItem().isItemEqual((new ItemStack(ModItems.GENJI_WEAPON_DRAGONBLADE)))) {
+                        if (!player.onGround) {
+                            if (!hasDoubleJumped && canDoubleJump) {
+                                if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+                                    player.motionY = 0;
+                                    playerIn.addVelocity(0, 0.65, 0);
+                                    hasDoubleJumped = true;
+                                    System.out.println("Double Jump");
+                                }
+                            } else {
+                                canDoubleJump = true;
                             }
                         } else {
+                            hasDoubleJumped = false;
                             canDoubleJump = true;
                         }
                     } else {
-                        hasDoubleJumped = false;
-                        canDoubleJump = true;
+
                     }
-                } else {
+
+                } catch (Exception exc) {
 
                 }
-
-            } catch (Exception exc) {
-
             }
-        }
-
     }
 
     @SubscribeEvent
