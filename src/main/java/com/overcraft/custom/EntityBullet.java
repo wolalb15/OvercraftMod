@@ -84,7 +84,8 @@ public class EntityBullet extends EntityThrowable {
 			world.createExplosion(this,posX,posY,posZ,1,false);
 		}
 		if(result.entityHit instanceof Entity) {
-			result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)10);
+			//result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)10);
+			result.entityHit.setDead();
 			System.out.println("IMPACT");
 		}
 	}

@@ -6,6 +6,7 @@ import com.overcraft.custom.EntityShield;
 import com.overcraft.renderer.RenderBullet;
 import com.overcraft.init.ModItems;
 
+import com.overcraft.renderer.RenderGuiHandler;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -64,7 +65,10 @@ public class OvercraftMod
         ClientRegistry.registerKeyBinding(ABILITY);
         FMLCommonHandler.instance().bus().register(new KeyHandler());
     }
-
+    @EventHandler
+    public void postInit(FMLPreInitializationEvent event){
+        MinecraftForge.EVENT_BUS.register(new RenderGuiHandler());
+    }
 
     public static void load(){
                MinecraftForge.EVENT_BUS.register(instance);

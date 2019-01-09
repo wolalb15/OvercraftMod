@@ -98,7 +98,7 @@ public class LucioWeapon extends Item {
                 }
             }else {
 
-                if (playerIn.ticksExisted % 20 == 0) {
+                if (playerIn.ticksExisted % 15 == 0 && playerIn.getHealth() != 0 && playerIn.getHealth() != playerIn.getMaxHealth()){
                     playerIn.addPotionEffect(healing);
                     playerIn.setHealth(playerIn.getHealth() + 0.5f);
                 }
