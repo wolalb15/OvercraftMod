@@ -1,6 +1,8 @@
 package com.overcraft;
 
 import com.overcraft.controller.Controller;
+import com.overcraft.custom.EntityBoop;
+import com.overcraft.custom.EntityFirestrike;
 import com.overcraft.custom.EntityShield;
 import com.overcraft.init.ModItems;
 import com.overcraft.items.weapons.GenjiWeaponDragonblade;
@@ -10,6 +12,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.particle.ParticleBubble;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityTNTPrimed;
@@ -24,10 +29,12 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -40,6 +47,8 @@ import java.util.Random;
 
 public class KeyHandler {
     boolean hasDoubleJumped = false, canDoubleJump = false, reverse = false, worldLoaded = false;
+    private boolean lucioShots = false;
+    private int lucioAv = 3;
 
 
     @SubscribeEvent
@@ -74,8 +83,17 @@ public class KeyHandler {
     @SubscribeEvent
     public void onKeyPressed(InputEvent.KeyInputEvent event) {
         EntityPlayer player = Minecraft.getMinecraft().player;
+        /*****************************************************************************
+            IF ABILITY IS PRESSED
+         *********************************************************************************/
+
         World worldIn = player.getEntityWorld();
+
         if (OvercraftMod.ABILITY.isPressed()) {
+            if (isInHand(ModItems.TRACER_WEAPON)) {
+            //_____________________________________________
+            //TRACER
+
             if (isInHand(ModItems.TRACER_WEAPON)) {
 
                 Vec3d aim = player.getLookVec();
@@ -94,14 +112,24 @@ public class KeyHandler {
                     player.setPositionAndUpdate(player.posX + (aim.x * -5), player.posY, player.posZ + (aim.z * -5));
                 }
             }
-
+            //_____________________________________________
+            //LUCIO
             if(isInHand(ModItems.LUCIO_WEAPON)){
                 Controller.lucioSpeed = !Controller.lucioSpeed;
                 FontRenderer fRender = Minecraft.getMinecraft().fontRenderer;
                 new GUINotification(Minecraft.getMinecraft());
 
             }
+
+            //_________________________________________________
+            //REINHARDT
+            if(isInHand(ModItems.REINHARDT_WEAPON)){
+                worldIn.spawnEntity(new EntityFirestrike(worldIn,player.posX,player.posY, player.posZ));
+            }
         }
+        /*****************************************************************************
+         IF ULTIMATE IS PRESSED
+         *********************************************************************************/
         if (OvercraftMod.ULTIMATE.isPressed()) {
             EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn, player.posX, player.posY, player.posZ, player);
             worldIn.spawnEntity(tnt);
@@ -109,6 +137,9 @@ public class KeyHandler {
                 worldIn.createExplosion(player, tnt.posX, tnt.posY, tnt.posZ, 0, true);
         }
 
+        /*****************************************************************************
+         IF SPACE IS PRESSED
+         *********************************************************************************/
         if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
             try {
                 EntityPlayer playerIn = Minecraft.getMinecraft().player;
@@ -147,6 +178,9 @@ public class KeyHandler {
         else return;
     }
 
+    /*****************************************************************************
+     IF KEY IS REE
+     *********************************************************************************/
     @SubscribeEvent
     public void onKeyReleased(InputEvent.KeyInputEvent event) {
         if (Keyboard.getEventKey() == Keyboard.KEY_S)
@@ -161,7 +195,30 @@ public class KeyHandler {
         if (!Mouse.isButtonDown(Mouse.getButtonIndex("BUTTON1")))
             Controller.removeShield();
         else {
+            if(isInHand(ModItems.REINHARDT_WEAPON))
             Controller.setShieldActive(true);
+        }
+
+        if(isInHand(ModItems.LUCIO_WEAPON) && Mouse.isButtonDown(Mouse.getButtonIndex("BUTTON0"))){
+            lucioShots = true;
+        }
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent.PlayerTickEvent event){
+        EntityPlayer playerIn = Minecraft.getMinecraft().player;
+        if(lucioShots){
+            if(lucioAv != 0){
+            if(playerIn.ticksExisted % 2 == 0){
+                System.out.println("LUCIO SHOTS");
+                Vec3d aim = playerIn.getLookVec();
+                if(playerIn.world.isRemote)
+                Minecraft.getMinecraft().world.spawnEntity(new EntityBoop(playerIn.world,aim.x,aim.y+0.5,aim.z));
+                lucioAv--;
+            }
+        } else {
+            lucioShots = false;
+        }
         }
     }
 

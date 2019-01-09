@@ -29,6 +29,8 @@ import java.util.Collection;
 
 public class LucioWeapon extends Item {
     public PotionEffect healing = new PotionEffect(Potion.getPotionById(10), 5, 0);
+    private int shotsAv = 3;
+
     public LucioWeapon(String name) {
         setUnlocalizedName(name);
         setRegistryName(name);
@@ -46,18 +48,6 @@ public class LucioWeapon extends Item {
             ItemStack slot = playerIn.getItemStackFromSlot(EntityEquipmentSlot.OFFHAND);
             slot.setCount(slot.getCount() - 1);
 
-            /*EntityArrow bullet = new CustomArrow(worldIn, playerIn);
-            bullet.shoot(playerIn, 0, 0, 0, 100, 1);
-            bullet.setPosition(playerIn.posX, playerIn.posY + 1.5, playerIn.posZ);
-            bullet.setDamage(1);
-
-            bullet.setVelocity(aim.x * 10, aim.y * 10, aim.z * 10);
-
-            worldIn.spawnEntity(bullet);*/
-
-
-
-
             if(worldIn.isRemote){
                 EntityBoop bullet = new EntityBoop(worldIn, playerIn.posX + aim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + aim.z,false);
                 worldIn.spawnEntity(bullet);}
@@ -69,13 +59,10 @@ public class LucioWeapon extends Item {
     }
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
     {
-        Vec3d aim = entityLiving.getLookVec();
-        World world = entityLiving.getEntityWorld();
+        World world = Minecraft.getMinecraft().world;
+        EntityPlayer playerIn= Minecraft.getMinecraft().player;
 
-        CustomParticle cp = new CustomParticle(entityLiving.getEntityWorld(),entityLiving.posX, entityLiving.posY,entityLiving.posZ);
-        cp.setSize(20f,20f);
-        Minecraft.getMinecraft().effectRenderer.addEffect(cp);
-        entityLiving.setPositionAndUpdate(entityLiving.posX,entityLiving.posY,entityLiving.posZ);
+
         return false;
     }
 
