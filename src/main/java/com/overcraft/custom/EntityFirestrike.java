@@ -2,7 +2,9 @@ package com.overcraft.custom;
 
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -75,10 +77,18 @@ public class EntityFirestrike extends EntityThrowable {
 
 	@SubscribeEvent
 	public void onImpact(RayTraceResult result) {
-		if(result.entityHit instanceof Entity) {
-			result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)10);
-			System.out.println("IMPACT");
-		}
+
+			if(isExplosive){
+				world.createExplosion(this,posX,posY,posZ,1,false);
+				this.setDead();
+			}
+			if(result.entityHit instanceof Entity && !(result.entityHit instanceof EntityPlayerSP)) {
+				EntityLiving en = (EntityLiving) result.entityHit;
+				en.setHealth(en.getHealth()-15);
+				en.performHurtAnimation();
+				this.setDead();
+			}
+
 
 		if(world.getBlockState(this.getPosition()) != Blocks.AIR.getDefaultState()){
 			this.setDead();

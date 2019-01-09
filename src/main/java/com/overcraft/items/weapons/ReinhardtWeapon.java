@@ -52,17 +52,7 @@ public class ReinhardtWeapon extends ItemSword {
         }
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
     }
-    public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
-    {
-        Vec3d aim = entityLiving.getLookVec();
-        World world = entityLiving.getEntityWorld();
 
-        CustomParticle cp = new CustomParticle(entityLiving.getEntityWorld(),entityLiving.posX, entityLiving.posY,entityLiving.posZ);
-        cp.setSize(20f,20f);
-        Minecraft.getMinecraft().effectRenderer.addEffect(cp);
-        entityLiving.setPositionAndUpdate(entityLiving.posX,entityLiving.posY,entityLiving.posZ);
-        return false;
-    }
 
 
     @SubscribeEvent

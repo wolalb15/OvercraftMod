@@ -5,39 +5,40 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class EntityBoop extends EntityThrowable {
-	boolean realBoop = false;
-	int birthTick;
-	public EntityBoop(World worldIn, double x, double y, double z, boolean realBoop) {
+public class EntityShuriken extends EntityThrowable {
+	boolean isExplosive = false;
+	double defMotionY;
+
+	public EntityShuriken(World worldIn, double x, double y, double z, boolean isExplosive) {
 		this(worldIn);
 		this.setPosition(x, y, z);
 		Vec3d aim = Minecraft.getMinecraft().player.getLookVec();
 		this.motionX = aim.x;
 		this.motionY = aim.y;
 		this.motionZ = aim.z;
-		this.realBoop = realBoop;
-		this.birthTick = Minecraft.getMinecraft().player.ticksExisted;
+		this.isExplosive = isExplosive;
+
+		defMotionY =  this.motionY;
 	}
 
-	public EntityBoop(World worldIn, double x, double y, double z) {
+	public EntityShuriken(World worldIn, double x, double y, double z) {
 		this(worldIn);
 		this.setPosition(x, y, z);
 		Vec3d aim = Minecraft.getMinecraft().player.getLookVec();
 		this.motionX = aim.x;
         this.motionY = aim.y;
 		this.motionZ = aim.z;
+
 	}
 
-	public EntityBoop(World worldIn) {
+	public EntityShuriken(World worldIn) {
 		super(worldIn);
 		this.setSize(0.8F, 0.8F);
 	}
@@ -58,13 +59,14 @@ public class EntityBoop extends EntityThrowable {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
+
+		this.motionY = defMotionY;
+
 		this.posX += this.motionX;
 		this.posY += this.motionY;
 		this.posZ += this.motionZ;
-		if(birthTick + 5 < Minecraft.getMinecraft().player.ticksExisted && realBoop){
-			this.setDead();
-		}
-		//this.motionY -= getGravityVelocity();
+
+
 
 
 	}
@@ -80,16 +82,14 @@ public class EntityBoop extends EntityThrowable {
 
 	@SubscribeEvent
 	public void onImpact(RayTraceResult result) {
-
-
+		this.setDead();
+		if(isExplosive){
+			world.createExplosion(this,posX,posY,posZ,1,false);
+		}
 		if(result.entityHit instanceof Entity && !(result.entityHit instanceof EntityPlayerSP)) {
-				EntityLiving en = (EntityLiving) result.entityHit;
-				en.setHealth(en.getHealth()-3);
-				en.performHurtAnimation();
-				Vec3d aim = Minecraft.getMinecraft().player.getLookVec();
-				if(realBoop)
-				en.setVelocity(aim.x*2,0,aim.z*2);
-                this.setDead();
+			EntityLiving en = (EntityLiving) result.entityHit;
+			en.setHealth(en.getHealth()-10);
+			en.performHurtAnimation();
 		}
 	}
 

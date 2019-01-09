@@ -2,6 +2,7 @@ package com.overcraft.custom;
 
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -91,10 +92,10 @@ public class EntityBullet extends EntityThrowable {
 		if(isExplosive){
 			world.createExplosion(this,posX,posY,posZ,1,false);
 		}
-		if(result.entityHit instanceof Entity) {
-			//result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)10);
-			result.entityHit.setDead();
-			System.out.println("IMPACT");
+		if(result.entityHit instanceof Entity && !(result.entityHit instanceof EntityPlayerSP)) {
+			EntityLiving en = (EntityLiving) result.entityHit;
+			en.setHealth(en.getHealth()-10);
+			en.performHurtAnimation();
 		}
 	}
 

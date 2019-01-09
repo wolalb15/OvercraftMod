@@ -23,7 +23,7 @@ public class TracerBullet extends Item {
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(CreativeTabs.COMBAT);
-        setMaxStackSize(20);
+        setMaxStackSize(64);
     }
 
 
