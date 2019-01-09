@@ -49,7 +49,7 @@ public class LucioWeapon extends Item {
             slot.setCount(slot.getCount() - 1);
 
             if(worldIn.isRemote){
-                EntityBoop bullet = new EntityBoop(worldIn, playerIn.posX + aim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + aim.z,false);
+                EntityBoop bullet = new EntityBoop(worldIn, playerIn.posX + aim.x, playerIn.posY + aim.y + 1.5, playerIn.posZ + aim.z,true);
                 worldIn.spawnEntity(bullet);}
 
 

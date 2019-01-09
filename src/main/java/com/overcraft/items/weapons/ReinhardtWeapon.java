@@ -9,19 +9,26 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
-public class ReinhardtWeapon extends Item {
+public class ReinhardtWeapon extends ItemSword {
+    public static final Item.ToolMaterial REINHARDT_MATERIAL = EnumHelper.addToolMaterial("REINHARDT_MATERIAL", 0, -1,
+            0, 8, 0).setRepairItem(new ItemStack(Items.IRON_INGOT));
+
     public ReinhardtWeapon(String name) {
+        super(REINHARDT_MATERIAL);
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(CreativeTabs.COMBAT);

@@ -58,7 +58,7 @@ public class EntityBoop extends EntityThrowable {
 		this.posX += this.motionX;
 		this.posY += this.motionY;
 		this.posZ += this.motionZ;
-		if(birthTick + 5 < Minecraft.getMinecraft().player.ticksExisted){
+		if(birthTick + 5 < Minecraft.getMinecraft().player.ticksExisted && realBoop){
 			this.setDead();
 		}
 		//this.motionY -= getGravityVelocity();

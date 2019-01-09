@@ -200,6 +200,7 @@ public class KeyHandler {
         }
 
         if(isInHand(ModItems.LUCIO_WEAPON) && Mouse.isButtonDown(Mouse.getButtonIndex("BUTTON0"))){
+            System.out.println("Left click");
             lucioShots = true;
         }
     }
@@ -210,14 +211,14 @@ public class KeyHandler {
         if(lucioShots){
             if(lucioAv != 0){
             if(playerIn.ticksExisted % 2 == 0){
-                System.out.println("LUCIO SHOTS");
-                Vec3d aim = playerIn.getLookVec();
-                if(playerIn.world.isRemote)
-                Minecraft.getMinecraft().world.spawnEntity(new EntityBoop(playerIn.world,aim.x,aim.y+0.5,aim.z));
+
+                if(!playerIn.world.isRemote)
+                Minecraft.getMinecraft().world.spawnEntity(new EntityBoop(playerIn.world,playerIn.posX, playerIn.posY, playerIn. posZ));
                 lucioAv--;
             }
         } else {
             lucioShots = false;
+            lucioAv = 3;
         }
         }
     }
